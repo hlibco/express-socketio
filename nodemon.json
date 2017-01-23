@@ -1,0 +1,17 @@
+{
+  "ignore": [
+    ".git",
+    "node_modules"
+  ],
+  "verbose": true,
+  "watch": [
+    "./"
+  ],
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": "3012",
+    "DEBUG": "www:*",
+    "DEBUG_COLORS": true
+  },
+  "exec": "node ./server"
+}

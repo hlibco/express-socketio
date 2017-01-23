@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Express</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <!-- Import socket.io  -->
+  <script>
+    var uri = document.location.port ? document.location.hostname + ':' + document.location.port : document.location.hostname;
+    var src = 'http://' + uri + '/socket.io/socket.io.js';
+    document.write("<script src=\"" + src + "\">");
+    document.write("</" + "script>");
+  </script>
+
+  <h1>Events</h1>
+  <p>Express + Socket.io</p>
+
+  <div class="page">
+    <div class="form">
+      <div class="field-1"></div>
+      <div class="field-2"></div>
+      <div class="field-3"></div>
+      <div class="submit">Save</div>
+    </div>
+
+    <div class="cli" id="cli">
+      <div class="cli-header">
+        Server events:
+        <button onClick="javascript:check(); return false;">Check</button>
+      </div>
+      <div class="cli-title">Server events:</div>
+    </div>
+  </div>
+
+
+  <!--  This needs to be a separate block -->
+  <script>
+    var cli = document.getElementById('cli');
+    var socket = io.connect('//' + uri);
+    var colors = {
+      hex: [
+
+      ],
+      index: 0
+    }
+    console.log(cli)
+    socket.on('connect', function () {
+      console.log('Client is connected');
+      socket.emit('ready', { msg: 'Client is connected' });
+    });
+    socket.on('ready', function (data) {
+      console.log(data.msg);
+      echo(data.msg)
+    });
+    socket.on('changes', function (data) {
+      console.log(data);
+      echo(data.msg)
+    });
+    socket.on('status', function (data) {
+      console.log(data);
+      echo(data.status)
+    });
+
+    function check() {
+      socket.emit('status', { msg: 'How are you server?' });
+    }
+
+    function echo (msg) {
+      var style = 'color: green;';
+      var b = document.createElement('B');
+      var t = document.createTextNode('> ' + msg);
+      b.appendChild(t);
+      cli.appendChild(b);
+    }
+  </script>
+
+
+  <style type="text/css">
+    h1, p {
+      text-align: center;
+    }
+    p {
+      margin-bottom: 32px;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    .page {
+      font-family: helvetica, arial, verdana;
+      font-size: 16px;
+      line-height: 21px;
+      margin: 0 auto;
+      max-width: 940px;
+      overflow: auto;
+    }
+    .form {
+      border: 1px solid #ddd;
+      float: left;
+      height: 400px;
+      padding: 24px;
+      width: 40%;
+    }
+    .field-1, .field-2, .field-3 {
+      background: #ddd;
+      height: 18px;
+      margin-bottom: 16px;
+    }
+    .field-1 {
+      width: 85%;
+    }
+    .field-2 {
+      width: 65%;
+    }
+    .field-3 {
+      width: 50%;
+    }
+    .submit {
+      background: #ddd;
+      border-radius: 4px;
+      color: #888;
+      line-height: 22px;
+      margin-top: 32px;
+      padding: 8px 0;
+      text-align: center;
+      width: 30%;
+    }
+    .cli {
+      background: #222;
+      color: #777;
+      float: right;
+      font-family: Courier, Terminal;
+      font-size: 16px;
+      line-height: 21px;
+      height: 400px;
+      padding: 24px;
+      width: 40%;
+    }
+    .cli-header {
+      background: #ddd;
+      color: #444;
+      margin: -24px -24px 24px;
+      padding: 24px;
+    }
+    .cli-title {
+      color: #d9d306;
+      margin-bottom: 16px;
+    }
+    .cli b {
+      color: #00a22b;
+      display: block;
+      font-weight: normal;
+      margin-bottom: 4px;
+    }
+  </div
+</body>
+</html>

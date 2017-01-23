@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  script.
+  script(src="http://localhost:3012/socket.io/socket.io.js")
+  script.
+    var uri = document.location.port ? document.location.hostname + ':' + document.location.port : document.location.hostname;
+    var socket = io.connect('//' + uri);
+    socket.on('connect', function () {
+      console.log('Client is connected');
+      socket.emit('ready', { msg: 'Client is connected' });
+    });
+    socket.on('ready', function (data) {
+      console.log(data.msg);
+    });
+    socket.on('changes', function (data) {
+      console.log(data);
+    });
+
+  button(onClick=)
