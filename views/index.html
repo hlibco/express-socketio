@@ -14,8 +14,7 @@
     document.write("</" + "script>");
   </script>
 
-  <h1>Events</h1>
-  <p>Express + Socket.io</p>
+  <h1>Express + Socket.io</h1>
 
   <div class="page">
     <div class="form">
@@ -34,18 +33,11 @@
     </div>
   </div>
 
-
   <!--  This needs to be a separate block -->
   <script>
     var cli = document.getElementById('cli');
     var socket = io.connect('//' + uri);
-    var colors = {
-      hex: [
 
-      ],
-      index: 0
-    }
-    console.log(cli)
     socket.on('connect', function () {
       console.log('Client is connected');
       socket.emit('ready', { msg: 'Client is connected' });
@@ -68,7 +60,6 @@
     }
 
     function echo (msg) {
-      var style = 'color: green;';
       var b = document.createElement('B');
       var t = document.createTextNode('> ' + msg);
       b.appendChild(t);
@@ -76,17 +67,11 @@
     }
   </script>
 
-
   <style type="text/css">
     h1, p {
+      margin-bottom: 32px;
       text-align: center;
     }
-    p {
-      margin-bottom: 32px;
-      letter-spacing: .3px;
-      text-transform: uppercase;
-    }
-
     .page {
       font-family: helvetica, arial, verdana;
       font-size: 16px;
@@ -153,6 +138,6 @@
       font-weight: normal;
       margin-bottom: 4px;
     }
-  </div
+  </style>
 </body>
 </html>
