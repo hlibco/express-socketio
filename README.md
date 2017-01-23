@@ -9,7 +9,6 @@ After understanding the mechanism, a possible use case is to *notify* the user w
 
 
 ## Use
----
 
 Install dependencies:
 `yarn` or `npm install`
